@@ -6,10 +6,10 @@ info:
     name: Apache 2.0
     url: "http://apache.org/"
 servers:
-  # - url: http://localhost:5000
-  #   description: Dev Server on Port
   - url: https://westco-task.herokuapp.com/
     description: Https Hosting Heroku
+  - url: http://localhost:5000
+    description: Dev Server on Port
 
 components:
   securitySchemes:
