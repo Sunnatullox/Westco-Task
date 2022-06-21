@@ -998,8 +998,7 @@ paths:
 
   /admin/courseUpdate/{id}:
     put:
-      put:
-      summary: User course delete
+      summary: User course update
       tags:
         - Admin Course
       description: We add the user to the course and we add the user ID to the course
@@ -1012,7 +1011,7 @@ paths:
             type: string
           required: true
           description: this is the course ID to updated cours Admin
-          example: 62b20de847fc3dfb699ec2a7
+          example: 62b241cec57596d4147cf96c
       requestBody:
         content:
           multipart/form-data:

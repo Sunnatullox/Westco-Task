@@ -135,18 +135,24 @@ router.post("/admin/courseCreate", Auth, async (req, res) => {
         return res.status(500).json({ error: "kechirasiz kurs yuklanmadi Sereverda hatolik!" })
     }
 })
-router.put(" /admin/courseUpdate/:id", Auth, async (req, res) => {
+
+
+router.put("/admin/courseUpdate/:id", Auth, async (req, res) => {
     const { name, price, description } = req.body;
     const { id } = req.params
+    console.log(name, price, description, req.files)
     const courseImg = req.files?.courseImg;
     const fileName = courseImg?.name
-
-    const file = courseImg && uuid.v4() + "-file-" + fileName
-    courseImg?.mv(path.resolve(__dirname, "..", "CourseFile", file))
     try {
-        await Course.findByIdAndUpdate({ _id: id }, { $set: { name, price, courseImg: file, description } })
+        
+            const file = courseImg && uuid.v4() + "-file-" + fileName
+            courseImg?.mv(path.resolve(__dirname, "..", "CourseFile", file))
+        const update = await Course.findByIdAndUpdate({ _id: id }, 
+            { $set: { name, price, courseImg: file, description } },{new:true})
+            console.log(update)
         return res.status(200).json({ msg: "Siz kursni muvafaqiyatli o'zgartirdingiz" })
     } catch (error) {
+        console.log(error)
         return res.status(500).json({ error: "kechirasiz kurs o'zgartirilmadi Serverda hatolik!" })
     }
 })
