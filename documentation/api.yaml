@@ -8,8 +8,8 @@ info:
 servers:
   - url: http://localhost:5000
     description: Dev Server on Port
-  # - url: http://staging-api.example.com
-  #   description: Optional server description, e.g. Internal staging server for testing
+  - url: https://westco-task.herokuapp.com/
+    description: Https Hosting Heroku
 
 components:
   securitySchemes:
