@@ -6,8 +6,8 @@ info:
     name: Apache 2.0
     url: "http://apache.org/"
 servers:
-  - url: http://localhost:5000
-    description: Dev Server on Port
+  # - url: http://localhost:5000
+  #   description: Dev Server on Port
   - url: https://westco-task.herokuapp.com/
     description: Https Hosting Heroku
 
@@ -227,7 +227,7 @@ paths:
               example:
                 name: Sunnatullox
                 email: Sunnatullox@gmail.com
-                password: 12345
+                password: "12345"
       responses:
         200:
           description: OK
@@ -247,7 +247,7 @@ paths:
                 _id: 62ae948249ef0d92e405b22b
                 name: Sunnatullox
                 email: Sunnatullox@gmail.com
-                password: 12345
+                password: "12345"
                 userLessons: []
                 userAdmin: false
                 userCourseId: []
@@ -274,7 +274,7 @@ paths:
                   type: string
               example:
                 email: Sunnatullox@gmail.com
-                password: 12345
+                password: "12345"
       responses:
         200:
           description: OK
@@ -326,7 +326,7 @@ paths:
               example:
                 name: Sunna
                 email: Sunna@gmail.com
-                password: 12345Sunna
+                password: "12345Sunna"
                 secretInfo: Men Uzbekistonda yashayman!
       responses:
         200:
@@ -372,7 +372,7 @@ paths:
                   type: string
               example:
                 email: Sunna@gmail.com
-                password: 12345Sunna
+                password: "12345Sunna"
       responses:
         200:
           description: OK

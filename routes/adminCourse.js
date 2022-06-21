@@ -71,7 +71,7 @@ router.get("/getCourseOne/:id", async (req, res) => {
     }
 })
 
-router.get("/getCourseComment/:id", async (req, res) => {
+router.get("/getCourseComment/:id",Auth, async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -87,7 +87,7 @@ router.get("/getCourseComment/:id", async (req, res) => {
     }
 })
 
-router.get("/getCourseBook/:id", async (req, res) => {
+router.get("/getCourseBook/:id",Auth, async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -131,6 +131,7 @@ router.post("/admin/courseCreate", Auth, async (req, res) => {
         }
 
     } catch (error) {
+        console.log(error)
         return res.status(500).json({ error: "kechirasiz kurs yuklanmadi Sereverda hatolik!" })
     }
 })

@@ -22,7 +22,7 @@ router.post("/signUp", async (req, res) => {
         }
         if (!users) {
             // user password hashed
-            const bcryptjs = await bcrypt.hash(password, 10);
+            const bcryptjs = await bcrypt.hash(password.toString(), 10);
             // user data db connected
             const user = new User({
                 name, email, password: bcryptjs
@@ -52,7 +52,7 @@ router.post("/signIn", async (req, res) => {
             return res.status(422).json({ error: "bunday email ro'yhatdan o'tmagan iltimos avval ro'yhatdan o'ting" })
         }
         //user password compaired
-        const userPassed = await bcrypt.compare(password, userData.password)
+        const userPassed = await bcrypt.compare(password.toString(), userData.password)
         if (userPassed) {
             // created user token
             const token = jwt.sign({ _id: userData._id }, JWT_SECRET)
