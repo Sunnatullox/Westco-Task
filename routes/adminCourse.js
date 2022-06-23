@@ -71,6 +71,9 @@ router.get("/user/getCourseOne/:id", async (req, res) => {
 
 
 
+
+
+
 router.get("/getCourseComment/:id",Auth, async (req, res) => {
     const { id } = req.params;
 
