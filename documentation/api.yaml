@@ -66,12 +66,12 @@ paths:
         500:
           description: Internal Server Error
 
-  /getCourseComment/{id}:
+  /user/getCourseOne/{id}:
     get:
-      summary: Get One Course Comment
+      summary: Get one course user
       tags:
         - Course
-      description: Get one Course Comment
+      description: Get one course comment
       parameters:
         - in: path
           name: id
@@ -79,7 +79,7 @@ paths:
             type: string
           required: true
           description: Get Course One for course Id
-          example: 62ae9ca688144d2d246e879d
+          example: 62b241cec57596d4147cf96c
       responses:
         200:
           description: OK
@@ -103,6 +103,60 @@ paths:
                 "userId": "62ac7f3fa525215eeede092f"
                 "createdAt": "2022-06-19T03:48:54.490Z"
                 "updatedAt": "2022-06-19T03:48:54.490Z"
+        404:
+          description: Not Found Course
+        500:
+          description: Internal Server Error
+ 
+  /getCourseComment/{id}:
+    get:
+      summary: Get one course comment
+      tags:
+        - Course
+      description: Get one course comment
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Get Course One for course Id
+          example: 62ae9ca688144d2d246e879d
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                tyep: object
+                properties:
+                _id: string
+                name: string
+                authorId: array
+                price: number
+                courseImg: string
+                courseUsersId: array
+                reating: number
+                description: string
+                lessons: array
+                books: array
+                comments: array
+                createdAt: string
+                updatedAt: string
+              example:
+                _id: 62ae948249ef0d92e405b22b
+                name: Node.js darslari 0 dan pro gacha
+                authorId: []
+                price: 1500000
+                courseImg: 18d181a6-d74b-40b3-b886-c409d76a6d21-file-nodejs_corse.png
+                courseUsersId: []
+                reating: 0
+                description: ""
+                lessons: []
+                books: []
+                comments: []
+                createdAt: "2022-06-19T03:14:10.029Z"
+                updatedAt: "2022-06-19T05:55:21.434Z"
         404:
           description: Not Found Course
         500:
