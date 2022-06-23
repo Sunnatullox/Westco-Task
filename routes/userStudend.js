@@ -40,7 +40,7 @@ router.put("/user/cuourseEnrole/:id",Auth, async (req, res) => {
 })
 
 
-router.get("/user/getCourseProfile/:id", async (req, res) => {
+router.get("/user/getCourseProfile/:id",Auth, async (req, res) => {
     //User id chunkiy userning profelida courlarning idilari bor id hisoplanadi
     const { id } = req.params;
 
@@ -61,7 +61,7 @@ router.get("/user/getCourseProfile/:id", async (req, res) => {
 })
 
 
-router.get("/user/getCourseOneProfile/:id", async (req, res) => {
+router.get("/user/getCourseOneProfile/:id",Auth, async (req, res) => {
     const { id } = req.params;
 
     try {
