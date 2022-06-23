@@ -53,6 +53,7 @@ router.get("/", async (req, res) => {
 })
 
 
+
 router.get("/user/getCourseOne/:id", async (req, res) => {
     const { id } = req.params;
     try {
@@ -68,9 +69,6 @@ router.get("/user/getCourseOne/:id", async (req, res) => {
         return res.status(500).json({ error: "Hechqanday kurs topilmadi Serverda hatolik" })
     }
 })
-
-
-
 
 
 

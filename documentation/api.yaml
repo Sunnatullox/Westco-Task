@@ -9,7 +9,7 @@ servers:
   - url: https://westco-task.herokuapp.com/
     description: Https Hosting Heroku
   - url: http://localhost:5000
-    description: Dev Server on port 
+    description: Dev Server on Port 
 
 components:
   securitySchemes:
