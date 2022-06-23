@@ -2,12 +2,14 @@ const { Router } = require("express");
 const mongoose = require("mongoose");
 const Course = mongoose.model("Course");
 const User = mongoose.model("User");
+const CourseLesson = mongoose.model("CourseLesson");
+const CourseBooks = mongoose.model("Books");
+const CourseComment = mongoose.model("CourseComment");
 const Auth = require("../middleware/Auth")
 const bcrypt = require("bcryptjs");
 const  uuid  = require("uuid");
 const router = Router();
 const path = require("path")
-
 
 router.put("/user/cuourseEnrole/:id",Auth, async (req, res) => {
     //Course id params id hisoplanadi
@@ -34,6 +36,47 @@ router.put("/user/cuourseEnrole/:id",Auth, async (req, res) => {
         }
     } catch (error) {
         return res.status(500).json({ error: "kechirasiz siz kursga yozilolmadingzi Serverda hatolik" })
+    }
+})
+
+
+router.get("/user/getCourseProfile/:id", async (req, res) => {
+    //User id chunkiy userning profelida courlarning idilari bor id hisoplanadi
+    const { id } = req.params;
+
+    try {
+        const searchUser = await User.findById({_id:id})
+        const userCourseId = await searchUser.userCourseId.map(i => i)
+        const userCourse = await Course.find({_id:{$in:userCourseId}})
+
+        // const coursLesson = await CourseLesson.findOne({courseId:{$in:userCourseId}})
+        // const coursBooks = await CourseBooks.findOne({courseId:coursResult._id.toString()})
+        // const CourseComments = await CourseComment.findOne({courseId:coursResult._id.toString()})
+
+        return res.status(200).json(userCourse)
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ error: "kechirasiz siz kursga yozilolmadingzi Serverda hatolik" })
+    }
+})
+
+
+router.get("/user/getCourseOneProfile/:id", async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const coursResult = await Course.findById({_id:id})
+        const coursLesson = await CourseLesson.findOne({courseId:coursResult._id.toString()})
+        const coursBooks = await CourseBooks.findOne({courseId:coursResult._id.toString()})
+        const CourseComments = await CourseComment.findOne({courseId:coursResult._id.toString()})
+        
+        if (!coursResult) {
+            return res.status(404).json({ msg: "kechirasiz bunday kurs topilmadi id hato" })
+        }
+        return res.status(200).json({ cours: coursResult, lesson:coursLesson, books:coursBooks, comment: CourseComments })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ error: "Hechqanday kurs topilmadi Serverda hatolik" })
     }
 })
 

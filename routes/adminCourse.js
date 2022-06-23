@@ -52,24 +52,6 @@ router.get("/", async (req, res) => {
     }
 })
 
-router.get("/getCourseOne/:id", async (req, res) => {
-    const { id } = req.params;
-
-    try {
-        const coursResult = await Course.findById({_id:id})
-        const coursLesson = await CourseLesson.findOne({courseId:coursResult._id.toString()})
-        const coursBooks = await CourseBooks.findOne({courseId:coursResult._id.toString()})
-        const CourseComments = await CourseComment.findOne({courseId:coursResult._id.toString()})
-        
-        if (!coursResult) {
-            return res.status(404).json({ msg: "kechirasiz bunday kurs topilmadi id hato" })
-        }
-        return res.status(200).json({ cours: coursResult, lesson:coursLesson, books:coursBooks, comment: CourseComments })
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json({ error: "Hechqanday kurs topilmadi Serverda hatolik" })
-    }
-})
 
 router.get("/getCourseComment/:id",Auth, async (req, res) => {
     const { id } = req.params;

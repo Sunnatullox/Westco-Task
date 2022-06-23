@@ -66,60 +66,6 @@ paths:
         500:
           description: Internal Server Error
 
-  /getCourseOne/{id}:
-    get:
-      summary: Get One User
-      tags:
-        - Course
-      description: Get one Course
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: string
-          required: true
-          description: Get Course One for course Id
-          example: 62aec4b4edf4613e87f85cb6
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                tyep: object
-                properties:
-                _id: string
-                name: string
-                authorId: array
-                price: number
-                courseImg: string
-                courseUsersId: array
-                reating: number
-                description: string
-                lessons: array
-                books: array
-                comments: array
-                createdAt: string
-                updatedAt: string
-              example:
-                _id: 62ae948249ef0d92e405b22b
-                name: Node.js darslari 0 dan pro gacha
-                authorId: []
-                price: 1500000
-                courseImg: 18d181a6-d74b-40b3-b886-c409d76a6d21-file-nodejs_corse.png
-                courseUsersId: []
-                reating: 0
-                description: ""
-                lessons: []
-                books: []
-                comments: []
-                createdAt: "2022-06-19T03:14:10.029Z"
-                updatedAt: "2022-06-19T05:55:21.434Z"
-        404:
-          description: Not Found Course
-        500:
-          description: Internal Server Error
-
   /getCourseComment/{id}:
     get:
       summary: Get One Course Comment
@@ -773,6 +719,114 @@ paths:
                 userEnroled: string
               example:
                 userEnroled: "User sucsess fuly enrolled cours"
+        404:
+          description: Not Found Course
+        500:
+          description: Internal Server Error
+
+  /user/getCourseProfile/{id}:
+    get:
+      summary: Get One User
+      tags:
+        - User Course
+      description: Get user courses 
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Get Courses for user Id
+          example: 62b23b7a7b947f6c0c88245b
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                tyep: object
+                properties:
+                _id: string
+                name: string
+                authorId: array
+                price: number
+                courseImg: string
+                courseUsersId: array
+                reating: number
+                description: string
+                lessons: array
+                books: array
+                comments: array
+                createdAt: string
+                updatedAt: string
+              example:
+                _id: 62ae948249ef0d92e405b22b
+                name: Node.js darslari 0 dan pro gacha
+                authorId: []
+                price: 1500000
+                courseImg: 18d181a6-d74b-40b3-b886-c409d76a6d21-file-nodejs_corse.png
+                courseUsersId: []
+                reating: 0
+                description: ""
+                lessons: []
+                books: []
+                comments: []
+                createdAt: "2022-06-19T03:14:10.029Z"
+                updatedAt: "2022-06-19T05:55:21.434Z"
+        404:
+          description: Not Found Course
+        500:
+          description: Internal Server Error
+
+  /user/getCourseOneProfile/{id}:
+    get:
+      summary: User Profile get course One 
+      tags:
+        - User Course
+      description: Get one Course
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Get Course One for course Id
+          example: 62aec4b4edf4613e87f85cb6
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                tyep: object
+                properties:
+                _id: string
+                name: string
+                authorId: array
+                price: number
+                courseImg: string
+                courseUsersId: array
+                reating: number
+                description: string
+                lessons: array
+                books: array
+                comments: array
+                createdAt: string
+                updatedAt: string
+              example:
+                _id: 62ae948249ef0d92e405b22b
+                name: Node.js darslari 0 dan pro gacha
+                authorId: []
+                price: 1500000
+                courseImg: 18d181a6-d74b-40b3-b886-c409d76a6d21-file-nodejs_corse.png
+                courseUsersId: []
+                reating: 0
+                description: ""
+                lessons: []
+                books: []
+                comments: []
+                createdAt: "2022-06-19T03:14:10.029Z"
+                updatedAt: "2022-06-19T05:55:21.434Z"
         404:
           description: Not Found Course
         500:
