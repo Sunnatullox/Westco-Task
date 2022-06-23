@@ -11,6 +11,101 @@ const  uuid  = require("uuid");
 const router = Router();
 const path = require("path")
 
+
+router.get("/", async (req, res) => {
+    try {
+        const coursResult = await Course.aggregate([
+            {
+                $lookup:
+                {
+                    from: "courselessons",
+                    localField: "_id",
+                    foreignField: "courseId",
+                    as: "lessons"
+                }
+            }, 
+            {
+                $lookup:
+                {
+                    from: "coursecomments",
+                    localField: "_id",
+                    foreignField: "courseId",
+                    as: "comments"
+                }
+            },
+            {
+                $lookup:
+                {
+                    from: "books",
+                    localField: "_id",
+                    foreignField: "courseId",
+                    as: "books"
+                }
+            },
+        ])
+        if (coursResult.length === 0) {
+            return res.status(404).json({ msg: "Hozzircha Kurslar mavjud emas" })
+        }
+        return res.status(200).json({ cours: coursResult })
+    } catch (error) {
+        return res.status(500).json({ error: "Hechqanday kurs topilmadi Serverda hatolik" })
+    }
+})
+
+
+
+router.get("/user/getCourseOne/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+        const coursResult = await Course.findById({_id:id})
+        const CourseComments = await CourseComment.findOne({courseId:coursResult._id.toString()})
+        
+        if (!coursResult) {
+            return res.status(404).json({ msg: "kechirasiz bunday kurs topilmadi id hato" })
+        }
+        return res.status(200).json({ cours: coursResult, comment: CourseComments })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ error: "Hechqanday kurs topilmadi Serverda hatolik" })
+    }
+})
+
+
+
+router.get("/getCourseComment/:id",Auth, async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const CourseComments = await CourseComment.findOne({_id:id})
+        
+        if (!CourseComments) {
+            return res.status(404).json({ msg: "kechirasiz bunday comment topilmadi id hato" })
+        }
+        return res.status(200).json(CourseComments)
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ error: "Hechqanday comment topilmadi Serverda hatolik" })
+    }
+})
+
+router.get("/getCourseBook/:id",Auth, async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const coursBooks = await CourseBooks.findOne({_id:id})
+        
+        if (!coursBooks) {
+            return res.status(404).json({ msg: "kechirasiz bunday kitop topilmadi id hato" })
+        }
+        return res.status(200).json(coursBooks)
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ error: "Hechqanday kitob topilmadi Serverda hatolik" })
+    }
+})
+
+
+
 router.put("/user/cuourseEnrole/:id",Auth, async (req, res) => {
     //Course id params id hisoplanadi
     const { id } = req.params;
